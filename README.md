@@ -34,3 +34,60 @@ HW Projects for CSS 545
 | **Temporary Cache**         | AsyncStorage                    | Easy solution for caching small temporary data, quick to implement.                                             | Limited size, not suited for caching large media or complex data.                                               |
 |                            | Expo FileSystem                 | Excellent for larger media caching, provides manual cache management.                                           | Manual cache cleanup required, no automatic cache expiration.                                                  |
 |                            | react-native-cache-manager       | Efficient for managing cached media with auto-expiration.                                                       | Requires integration with file system for handling large files.                                                |
+
+
+# HW3 - State management
+### Active state:
+- App is currently open and in use
+- Important because this is when the user is expecting the app to deliver promised functionalities
+- In this state app should function as normal
+
+### Inactive state:
+- Brief state where app is temporarily not receiving user input such as when a user switches to another app or phone call
+- Important to consider because transitions to and from this state can disrupt user experience if not handled properly
+- In this state the app should pause all non-essential tasks like background animations or data fetching, save the current app state if its transitioned to the background, and temporarily stop receiving user input but prepare for resuming.
+
+### Suspended State:
+- The app is no longer running in memory and has been completely unloaded by the OS, which can occur if the OS needs resources or if the user doesn’t return to the app for a while.
+- Suspended states mean the app is no longer in memory, so it needs to restore the user’s last known state to ensure a seamless user experience upon return.
+-
+Release any resources that were not saved during the background state.
+Prepare mechanisms for restoring the user’s session or state to where they left off when the app is relaunched.
+### Error States:
+- These states occur when the app encounters unexpected issues (e.g., network failures, unhandled exceptions, or API response errors).
+- Proper error handling improves user experience and prevents crashes, ensuring that users can continue using the app.
+-
+Display user-friendly error messages and recovery options, such as “Try Again” buttons.
+Log errors to monitoring services like Sentry or Firebase Crashlytics for debugging and diagnostics.
+Allow users to recover or reset the affected component without requiring a full app restart.
+### Network Connectivity States:
+- These states track changes in the app’s network connectivity, including online, offline, or limited connectivity.
+- Connectivity fluctuations are common on mobile devices and can affect data-reliant features.
+-
+Provide offline mode capabilities by caching essential data locally, enabling some functionality without internet.
+Gracefully handle connectivity changes, and resume any necessary data sync when the connection is restored.
+Display network indicators when connectivity is critical to app functionality.
+### Permission States:
+- These states arise when the app requests user permissions (e.g., location, camera, or push notifications).
+- Permissions are necessary for accessing specific features, and handling them appropriately maintains user trust.
+- Handle permission denial gracefully by providing alternative paths or fallback options.
+Provide users with context on why permissions are necessary for certain features.
+Track permission status and adjust functionality based on the user’s permissions.
+### Authentication States:
+- States related to user login status, such as logged in, logged out, or session expired.
+- Authentication impacts user access to personalized features and content within the app.
+- Persist the user’s authentication status across sessions to ensure they remain logged in.
+Redirect to the login screen if the session expires.
+Attempt to refresh tokens or re-authenticate if possible to prevent interrupting the user experience.
+### Loading States:
+- States where data is being fetched, uploaded, or processed in the app.
+- Proper handling of loading states improves the user experience, preventing the app from feeling unresponsive.
+- Show loading indicators or skeleton screens while data is being processed or loaded.
+Provide cancel or retry options for long-running operations.
+Ensure good user feedback, so users know the app is processing data and remains responsive.
+### Update States:
+- States where the app undergoes updates, either self-updating (over-the-air updates) or through the app store.
+- Keeping the app updated ensures users benefit from security fixes, new features, and stability improvements.
+- Notify users about available updates and provide prompts for a restart if required.
+For over-the-air (OTA) updates, ensure updates are smooth and don’t interrupt the user’s current session.
+Handle any data migrations or updates to ensure continuity and prevent data loss after the update is applied.
