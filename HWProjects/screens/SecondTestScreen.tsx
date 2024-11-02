@@ -9,6 +9,7 @@ const SecondTestScreen = ({ navigation }) => {
         title="Go Back to Home" 
         onPress={() => navigation.goBack()} 
       />
+      <Button title="Go to ThirdScreen" onPress={() => navigation.navigate('ThirdStateScreen')}/>
     </View>
   );
 };
